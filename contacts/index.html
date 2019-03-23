@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通讯录</title>
+    <link rel="stylesheet" href="./src/contact.css">
+</head>
+<body>
+
+    <div id="contacts">
+        <!-- 通讯录列表 -->
+        <div class="contacts-wrap"></div>
+        <!-- 字母侧边栏 -->
+        <div class="contacts-sidebar"></div>
+        <!-- 模态框 -->
+        <div class="contacts-modal">J</div>
+
+    </div>
+
+
+    <script src="./src/jquery.min.js"></script>
+    <!-- code.js 为汉字转码js -->
+    <script src="./src/code.js"></script>
+    <script src="./src/contact.js"></script>
+    <script type="text/javascript">
+       
+       var initArr=["郭靖","黄蓉","张三","李四","安","保持","参数","第四","张三","王五","言语","马云","马上","马虎","理解","礼节","李云","李单","换啊","12","1","3","en","am","ba","id",'##'];
+
+       makeContact(initArr);
+    </script>
+</body>
+</html>
