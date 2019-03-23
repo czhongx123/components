@@ -67,7 +67,7 @@ $('.contacts-sidebar').on('click','span',function(){
     var index=$(this).index();
     var getFirst = $(".contacts-wrap").children(".item")[index];//获取第index个firstBlood的class类
     $(".contacts-wrap").animate({ scrollTop:getFirst.offsetTop }, 200);
-    setModal($(this).text())
+    setModal($(this).html())
 })
 
 //监听滚动条滚动事件
@@ -184,7 +184,7 @@ function sortByChart(arr,type){
 
 //生成模态框
 function setModal(value){
-    $('.contacts-modal').show();
+    $('.contacts-modal').show().html(value);
     setTimeout(function(){
         $('.contacts-modal').hide();
     },300)
