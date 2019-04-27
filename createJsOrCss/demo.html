@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="demo" id="demo"></div>
+    <script src="./create.js"></script>
+    <script>
+
+/*
+
+el:添加到的元素容器，可为id名(#demo),class名(.demo)名，不填默认为标签内；
+resourceList：需要添加的js或者css
+*/
+
+    createJsOrCss({
+        el:".demo",
+        resourceList:[{
+            id:"gg",
+            className:['aa','bb'],
+            type:"js",
+            url:"./aa.js"
+        },
+        {
+            id:"dd",
+            className:['aa','bb'],
+            type:"css",
+            url:"./aa.css"
+        },
+        {
+            id:"ee",
+            className:['aa','bb'],
+            type:"css",
+            url:"./aa.css"
+        }]
+    })
+    
+    </script>
+</body>
+</html>
