@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>追踪算法</title>
+</head>
+
+<body>
+    <!-- 算法原理 -->
+<!-- 参考文章：https://www.jb51.net/article/152633.htm -->
+    <!-- 假设在canvas坐标系中存在物体A和B，物体A将把B作为追踪目标，物体在二维空间中的运动
+        可以分解为坐标系中X、Y轴的运动，其在X和Y方向的速度决定了物体运行的方向和速率。别忘了
+        ，速度是有方向和大小的，于是物体A的速度在X、Y轴方向分解成vx、vy，B物体也是一样，这样
+        ，如果物体A要追踪到B，只需要比较两个物体分别在 X、Y 方向的速度即可。设物体 A 坐标为(x1, y1)
+        ，A 的速度分解为(vx, vy)，物体B 坐标为(x2, y2)，B 的速度分解为(vx1, vy1)，假设A 要追到B，
+        对于水平X 方向分量来说，如果x2>x1，表示B在A的右边，这时候必须设置vx为某一个正值
+        ，反之，则需要将vx设置成一个负值，同样的道理，对于垂直方向Y来说，需要进行同样的处理即可。 -->
+
+        <canvas id="stage"></canvas>
+        <script>
+            window.onload = function () {
+              var stage = document.querySelector('#stage'),
+                ctx = stage.getContext('2d');
+              stage.width = 400;
+              stage.height = 400;
+              balls = [];
+              var ball = {
+                x: stage.width / 2 - 20,
+                y: stage.height / 2 - 20,
+                r: 20,
+                c: "red"
+              };
+              balls.push(ball);
+              for (var i = 0; i < 30; i++) {
+                var trace = {
+                  x: Math.ceil(Math.random() * (stage.width - 20) + 10),
+                  y: Math.ceil(Math.random() * (stage.height - 20) + 10),
+                  r: 10,
+                  c: "blue"
+                };
+                balls.push(trace);
+              }
+              function createBall(x, y, r, c) {
+                ctx.beginPath();
+                ctx.fillStyle = c;
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+              }
+              stage.addEventListener('click', function (event) {
+                var x = event.clientX - stage.getBoundingClientRect().left;
+                var y = event.clientY - stage.getBoundingClientRect().top;
+                balls[0].x = x;
+                balls[0].y = y;
+              });
+              function update() {
+                ctx.clearRect(0, 0, 400, 400);
+                ctx.fillStyle = "black";
+                ctx.rect(0, 0, 400, 400);
+                ctx.fill();
+                createBall(balls[0].x, balls[0].y, balls[0].r, balls[0].c);
+                for (var i = 1, len = balls.length; i < len; i++) {
+                  //简单算法
+                  balls[i].x -= ( balls[0].x>balls[i].x)?-1:1;
+                  balls[i].y -= ( balls[0].y>balls[i].y)?-1:1;
+                  createBall(balls[i].x, balls[i].y, balls[i].r, balls[i].c);
+                }
+                requestAnimationFrame(update);
+              }
+              update();
+            };
+          </script>
+</body>
+
+</html>

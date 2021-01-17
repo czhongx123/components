@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>追踪算法</title>
+</head>
+
+<body>
+    <!-- 算法原理 -->
+<!-- 参考文章：https://www.jb51.net/article/152633.htm -->
+<!-- 视线追踪算法，采用这种算法，追踪者将会始终保持着和目标对象的直线进行移动，如下图所示，看起来就好像追踪捕食的猎豹一样，死死地盯着目标不放。 -->
+
+<!-- 如果要达到这种效果，实际上就表示在任意时刻，A 的速度方向必须保持在 AB 之间连接的直线上面，那么这个时候如何获取A的速度在x轴和y轴方向上的分量呢？ -->
+
+<!-- 这里我们可以采用向量来解决问题，向量是一种只有方向和大小而没有位置的概念，由向量的知识可知，假设任意时刻物体 A 向量表示为 v1(x1, y1)，物体 B 向量表示为 v2(x2, y2)，则由A 指向B 位置的向量v3=(x2−x1, y2−y1)。这3 个向量的关系可以由图6-4 表示出来，设向量v3的长度为VLen =√ (x2−x1)²+(y2−y1)² ，则向量v3标准化后可以用v4=((x2−x1)/VLen，(y2−y1)/VLen)表示。最后得到的v4在x轴方向上的分量就可以作为物体A在该时刻X轴方向上的分量，v4在Y轴方向上的分量就可以作为物体A在该时刻Y轴方向上的分量。 -->
+
+        <canvas id="stage"></canvas>
+        <script>
+            window.onload = function () {
+              var stage = document.querySelector('#stage'),
+                ctx = stage.getContext('2d');
+              stage.width = 400;
+              stage.height = 400;
+              balls = [];
+              var ball = {
+                x: stage.width / 2 - 20,
+                y: stage.height / 2 - 20,
+                r: 20,
+                c: "red"
+              };
+              balls.push(ball);
+              for (var i = 0; i < 30; i++) {
+                var trace = {
+                  x: Math.ceil(Math.random() * (stage.width - 20) + 10),
+                  y: Math.ceil(Math.random() * (stage.height - 20) + 10),
+                  r: 10,
+                  c: "blue"
+                };
+                balls.push(trace);
+              }
+              function createBall(x, y, r, c) {
+                ctx.beginPath();
+                ctx.fillStyle = c;
+                ctx.arc(x, y, r, 0, Math.PI * 2);
+                ctx.fill();
+              }
+              stage.addEventListener('click', function (event) {
+                var x = event.clientX - stage.getBoundingClientRect().left;
+                var y = event.clientY - stage.getBoundingClientRect().top;
+                balls[0].x = x;
+                balls[0].y = y;
+              });
+              function update() {
+                ctx.clearRect(0, 0, 400, 400);
+                ctx.fillStyle = "black";
+                ctx.rect(0, 0, 400, 400);
+                ctx.fill();
+                createBall(balls[0].x, balls[0].y, balls[0].r, balls[0].c);
+                for (var i = 1, len = balls.length; i < len; i++) {
+                  //视线追踪算法
+                  var vx = balls[i].x - balls[0].x,
+                    vy = balls[i].y - balls[0].y,
+                    rlen = Math.sqrt(vx * vx + vy * vy),
+                    dx = vx / rlen,
+                    dy = vy / rlen;
+                  balls[i].x -= dx;
+                  balls[i].y -= dy;
+                  createBall(balls[i].x, balls[i].y, balls[i].r, balls[i].c);
+                }
+                requestAnimationFrame(update);
+              }
+              update();
+            };
+          </script>
+</body>
+
+</html>

@@ -104,35 +104,51 @@
 
                 }
             }
+            console.log(data1,'data1')
 
-
-            arr1 = [{
+            arr1 = [
+            {
                     name: "计划开始时间",
                     type: 'bar',
-                    stack: '总量',
-                   
+                    stack: 'sum',
                     itemStyle: {
                         barBorderColor: 'rgba(0,0,0,0)',
                         color: 'rgba(0,0,0,0)'
                     },
-                    // emphasis: {
-                    //     itemStyle: {
-                    //         barBorderColor: 'rgba(0,0,0,0)',
-                    //         color: 'rgba(0,0,0,0)'
-                    //     }
-                    // },
+                    emphasis: {
+                        itemStyle: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    },
+                    itemStyle: {
+                        barBorderColor: 'rgba(0,0,0,0)',
+                        color: 'rgba(0,0,0,0)'
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            barBorderColor: 'rgba(0,0,0,0)',
+                            color: 'rgba(0,0,0,0)s'
+                        }
+                    },
+                
+                    
                     data: data1
                 },
                 {
                     name: "计划结束时间",
                     type: 'bar',
-                    stack: '总量',
-                    // itemStyle: {
-                    //     barBorderColor: 'rgba(0,0,0,0)',
-                    //     color: 'rgba(0,0,0,0.1)'
-                    // },
+                    stack: 'sum',
+
+                    itemStyle: {
+                    
+                        // barBorderColor: 'rgba(0,0,0,0)',
+                        // color: 'rgba(0,0,0,0.5)'
+                    },
+                    // "itemStyle": {"normal": {"color": "#58b7ff","barBorderWidth": 1,"barBorderColor": "#4893ce"}},
                     data: data2,
                 },
+               
             ]
             arr = arr.concat(arr1)
         }
@@ -140,6 +156,7 @@
         console.log(arr)
 
         var option = {
+            // color:'rgba(0,0,0,0)',
             title: {
                 text: '任务实施进度表',
                 left: 10

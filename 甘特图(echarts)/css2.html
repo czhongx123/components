@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+   div{
+       width: 200px;
+       height: 20px;
+       border: 5px solid #f3f3f3;
+       border-radius:20px;
+      
+   }
+   span{
+       float: left;
+       width: 20px;
+       height: 20px;
+       animation-name: change;
+       animation-duration: 1s;
+       animation-timing-function: linear;
+       animation-iteration-count: infinite;
+   }
+  span:nth-child(even){
+      background-color: lawngreen;
+  }
+
+   @keyframes change {
+       0%{
+        transform：translate(20px,0) rotate(45deg);
+       }
+       50%{
+        transform：translate(20px,0) rotate(45deg);
+       }
+       100%{
+        transform：translate(20px,0) rotate(45deg);
+       }
+       
+   }
+</style>
+
+<body>
+    <div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</body>
+
+</html>
